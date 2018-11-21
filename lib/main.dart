@@ -1,15 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-void main() => runApp(KainAppBar('Flutter Demo'));
+void main() => runApp(MyApp());
 
-class KainAppBar extends StatelessWidget {
-  final String title;
-
-  KainAppBar(this.title);
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Flutter Demo',
+      home: new MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Widget bodyWidget = new Card(
+      child: Column(
+        children: <Widget>[
+          new Text(
+            'This is my body Area, I will put anything that I like here',
+            style: TextStyle(fontSize: 20),
+          ),
+          Image.network('https://avatarfiles.alphacoders.com/848/84855.jpg')
+        ],
+      ),
+    );
+    return new KainGradientAppBar()
+        .getGradientAppBar('Hello', context, bodyWidget);
+  }
+}
+
+class KainGradientAppBar {
+  getGradientAppBar(String title, BuildContext context, Widget bodyWidget) {
     return MaterialApp(
       home: Scaffold(
         appBar: new GradientAppBar(
@@ -35,6 +59,14 @@ class KainAppBar extends StatelessWidget {
                   backgroundImage: new NetworkImage(
                       'https://avatarfiles.alphacoders.com/848/84855.jpg'),
                 ),
+              ),
+              new ListTile(
+                title: new Text('Home'),
+                leading: Icon(Icons.home),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed('/home_screen');
+                },
               ),
               new ListTile(
                 title: new Text('Restaurants'),
@@ -73,26 +105,11 @@ class KainAppBar extends StatelessWidget {
               new ListTile(
                 title: new Text('Logout'),
                 leading: Icon(Icons.power_settings_new),
-                onTap: () {
-                  print('Login code here');
-                },
               ),
             ],
           ),
         ),
-        body: new Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(50.0, 160.0, 50.0, 0.0),
-              child: new Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[],
-              ),
-            )
-          ],
-        ),
+        body: bodyWidget,
       ),
     );
   }
