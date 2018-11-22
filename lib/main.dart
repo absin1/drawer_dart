@@ -9,7 +9,67 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       home: new MyHomePage(),
+      routes: <String, WidgetBuilder>{
+        '/home_screen': (BuildContext context) => new MyHomePage(),
+        '/restaurant_screen': (BuildContext context) => new Restaurants(),
+        '/nearby_screen': (BuildContext context) => new Nearby(),
+        '/request_screen': (BuildContext context) => new Request(),
+      },
     );
+  }
+}
+
+class Restaurants extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Widget bodyWidget = new Card(
+      child: Column(
+        children: <Widget>[
+          new Text(
+            'Restaurants',
+            style: TextStyle(fontSize: 20),
+          )
+        ],
+      ),
+    );
+    return new KainGradientAppBar()
+        .getGradientAppBar('Hello', context, bodyWidget);
+  }
+}
+
+class Nearby extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Widget bodyWidget = new Card(
+      child: Column(
+        children: <Widget>[
+          new Text(
+            'Nearby',
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
+      ),
+    );
+    return new KainGradientAppBar()
+        .getGradientAppBar('Hello', context, bodyWidget);
+  }
+}
+
+class Request extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Widget bodyWidget = new Card(
+      child: Column(
+        children: <Widget>[
+          new Text(
+            'Request',
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
+      ),
+    );
+    return new KainGradientAppBar()
+        .getGradientAppBar('Hello', context, bodyWidget);
   }
 }
 
@@ -64,7 +124,6 @@ class KainGradientAppBar {
                 title: new Text('Home'),
                 leading: Icon(Icons.home),
                 onTap: () {
-                  Navigator.of(context).pop();
                   Navigator.of(context).pushNamed('/home_screen');
                 },
               ),
@@ -72,7 +131,6 @@ class KainGradientAppBar {
                 title: new Text('Restaurants'),
                 leading: Icon(Icons.restaurant_menu),
                 onTap: () {
-                  Navigator.of(context).pop();
                   Navigator.of(context).pushNamed('/restaurant_screen');
                 },
               ),
@@ -80,7 +138,6 @@ class KainGradientAppBar {
                 title: new Text('Nearby'),
                 leading: Icon(Icons.near_me),
                 onTap: () {
-                  Navigator.of(context).pop();
                   Navigator.of(context).pushNamed('/nearby_screen');
                 },
               ),
@@ -88,7 +145,6 @@ class KainGradientAppBar {
                 title: new Text('Request Restaurant'),
                 leading: Icon(Icons.library_add),
                 onTap: () {
-                  Navigator.of(context).pop();
                   Navigator.of(context).pushNamed('/request_screen');
                 },
               ),
